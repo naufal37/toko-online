@@ -13,7 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-            return Category::all();
+      $daftar_kategori =  Category::paginate(2);
+      return view('kategori.index',["daftar_kategori"=>$daftar_kategori]);
     }
 
     /**
@@ -66,5 +67,9 @@ class CategoryController extends Controller
       $category = Category::withTrashed()->findOrfail($id)->forceDelete();
       return "category berhasil dihapus permanen!";
 
+    }
+
+    public function child(){
+      return view('layouts.child');
     }
 }
